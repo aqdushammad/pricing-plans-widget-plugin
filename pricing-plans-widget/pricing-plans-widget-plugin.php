@@ -3,7 +3,7 @@
  * Plugin Name: Pricing Plans Widget
  * Plugin URI: https://www.facebook.com/aqdushammad
  * Description: A fully responsive pricing plans slider widget for WordPress with Elementor support. Display beautiful pricing cards with internet speeds, TV channels, and promotional offers.
- * Version: 2.1
+ * Version: 2.2
  * Author: Aqdus Hammad
  * Author URI: https://www.facebook.com/aqdushammad
  * License: GPL v2 or later
@@ -23,7 +23,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('PRICING_PLANS_WIDGET_VERSION', '2.1');
+define('PRICING_PLANS_WIDGET_VERSION', '2.2');
 define('PRICING_PLANS_WIDGET_FILE', __FILE__);
 define('PRICING_PLANS_WIDGET_PATH', plugin_dir_path(__FILE__));
 define('PRICING_PLANS_WIDGET_URL', plugin_dir_url(__FILE__));
