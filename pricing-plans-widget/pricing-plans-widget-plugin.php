@@ -29,30 +29,27 @@ define('PRICING_PLANS_WIDGET_PATH', plugin_dir_path(__FILE__));
 define('PRICING_PLANS_WIDGET_URL', plugin_dir_url(__FILE__));
 define('PRICING_PLANS_WIDGET_BASENAME', plugin_basename(__FILE__));
 
-if (!defined('PRICING_PLANS_WIDGET_GITHUB_REPO')) {
-    define('PRICING_PLANS_WIDGET_GITHUB_REPO', '');
-}
+if (is_admin()) {
+    $ppw_github_repo = defined('PRICING_PLANS_WIDGET_GITHUB_REPO') ? (string) PRICING_PLANS_WIDGET_GITHUB_REPO : '';
+    $ppw_github_token = defined('PRICING_PLANS_WIDGET_GITHUB_TOKEN') ? (string) PRICING_PLANS_WIDGET_GITHUB_TOKEN : '';
 
-if (!defined('PRICING_PLANS_WIDGET_GITHUB_TOKEN')) {
-    define('PRICING_PLANS_WIDGET_GITHUB_TOKEN', '');
-}
-
-if (is_admin() && PRICING_PLANS_WIDGET_GITHUB_REPO !== '') {
+    if ($ppw_github_repo !== '') {
     $puc_bootstrap = PRICING_PLANS_WIDGET_PATH . 'plugin-update-checker-master/plugin-update-checker.php';
     if (file_exists($puc_bootstrap)) {
         require_once $puc_bootstrap;
 
         $pricing_plans_widget_update_checker = \YahnisElsts\PluginUpdateChecker\v5p6\PucFactory::buildUpdateChecker(
-            PRICING_PLANS_WIDGET_GITHUB_REPO,
+            $ppw_github_repo,
             PRICING_PLANS_WIDGET_FILE,
             'pricing-plans-widget'
         );
         $pricing_plans_widget_update_checker->setBranch('main');
         $pricing_plans_widget_update_checker->getVcsApi()->enableReleaseAssets('/\.zip($|[?&#])/i');
 
-        if (PRICING_PLANS_WIDGET_GITHUB_TOKEN !== '') {
-            $pricing_plans_widget_update_checker->setAuthentication(PRICING_PLANS_WIDGET_GITHUB_TOKEN);
+        if ($ppw_github_token !== '') {
+            $pricing_plans_widget_update_checker->setAuthentication($ppw_github_token);
         }
+    }
     }
 }
 
